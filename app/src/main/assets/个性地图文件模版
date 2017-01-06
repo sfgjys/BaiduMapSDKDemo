@@ -1,0 +1,205 @@
+
+
+下面的json字符串中
+featureType 字段的值代表的有:陆地,水,行政区,地铁,国道,各种文本等 这里的值除了文本,其他的都属于形状范畴  注意有的值包括文本和形状的含义这就需要elementType的值来区分
+elementType 字段的值有五种: geometry.fill (如果featureType的值不是文本而是形状,那stylers就是形状的填冲设置);
+                          geometry.stroke (如果featureType的值不是文本而是形状,那stylers就是形状的边框设置);
+                          labels.text.fill (如果featureType的值是文本而不是形状,那stylers就是文本的填冲设置);
+                          labels.text.stroke (如果featureType的值是文本而不是形状,那stylers就是文本的边框设置)
+                          all (则代表填充和形状都有)
+[
+    // 陆地
+    {
+        "featureType": "land",
+        "elementType": "geometry.fill",
+        "stylers": {
+            "color": "#000000", // 颜色
+            "visibility": "off" // 是否显示: "off"不显示 , "on"显示
+        }
+    },
+    {
+        "featureType": "land",
+        "elementType": "geometry.stroke",
+        "stylers": {
+            "color": "#000000",
+            "visibility": "off"
+        }
+    },
+
+    // 水系
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 绿地
+    {
+        "featureType": "green",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "green",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 人造区域
+    {
+        "featureType": "manmade",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "manmade",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 建筑物
+    {
+        "featureType": "building",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "building",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 高速及国道
+    {
+        "featureType": "highway",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "highway",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+    {
+        "featureType": "highway",
+        "elementType": "labels.text.fill",
+        "stylers": {
+            "color": "#000000",
+            "visibility": "off"
+        }
+    },
+    {
+        "featureType": "highway",
+        "elementType": "labels.text.stroke",
+        "stylers": {}
+    },
+
+    // 城市主路
+    {
+        "featureType": "arterial",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "arterial",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+    {
+        "featureType": "arterial",
+        "elementType": "labels.text.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "arterial",
+        "elementType": "labels.text.stroke",
+        "stylers": {}
+    },
+
+    // 普通道路
+    {
+        "featureType": "local",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "local",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+    {
+        "featureType": "local",
+        "elementType": "labels.text.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "local",
+        "elementType": "labels.text.stroke",
+        "stylers": {}
+    },
+
+    // 铁路
+    {
+        "featureType": "railway",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "railway",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 地铁
+    {
+        "featureType": "subway",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "subway",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 行政区
+    {
+        "featureType": "boundary",
+        "elementType": "geometry.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "boundary",
+        "elementType": "geometry.stroke",
+        "stylers": {}
+    },
+
+    // 所有文字（除行政区文字、所有道路）
+    {
+        "featureType": "poilabel",
+        "elementType": "labels.text.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "poilabel",
+        "elementType": "labels.text.stroke",
+        "stylers": {}
+    },
+
+    // 行政区文字
+    {
+        "featureType": "districtlable",
+        "elementType": "labels.text.fill",
+        "stylers": {}
+    },
+    {
+        "featureType": "districtlable",
+        "elementType": "labels.text.stroke",
+        "stylers": {}
+    }
+]

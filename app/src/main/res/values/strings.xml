@@ -141,6 +141,22 @@
                        获取行政区域名称:getCityName()
                        获取行政区域边界坐标点:getPolylines() 由于行政区可能有两块地方不重合,所以坐标集合可能有两个以上,用另一个集合存放多个坐标集合
            销毁: 当不再使用检索行政区功能模块时,记得释放对象资源 DistrictSearch对象调用destroy()方法;</string>
+    <string name="describe_search_bus_line_map">
+         公交线路检索(要想进行公交线路检索,前提需要知道要检索的公交线路的uid):
+           首先通过POI搜索获取要检索的公交线路的uid:
+               初始化功能模块对象:PoiSearch.newInstance();获取PoiSearch对象
+               设置POI搜索结果监听接口:PoiSearch对象调用setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener())方法
+               开始搜索:PoiSearch对象调用searchInCity((new PoiCitySearchOption()).city(要检索的公交线路所在城市).keyword(要检索的公交线路关键字).pageCapacity(检索结果容量,因为返回的结果都是公交线路在最前面,可以不用担心容量大小问题？));
+                       因为检索公交线路一般都是城内的,所以用城内检索
+               对监听接口中返回结果进行处理:城内检索的返回结果在onGetPoiResult方法中,PoiResult对象调用getAllPoi()方法获取所有PoiInfo信息对象的集合,
+                       并通过PoiInfo.POITYPE.BUS_LINE和PoiInfo.POITYPE.SUBWAY_LINE来判断本PoiInfo类型是否是公交路线和地铁路线,注意是路线不是站点而且符合类型的PoiInfo有可能是多个,是的话就获取PoiInfo的uid,存储进集合
+           然后使用uid集合通过公交路线搜索模块进行查询:
+               初始化功能模块对象:BusLineSearch.newInstance();获取BusLineSearch对象
+               设置公交路线搜索结果监听接口:BusLineSearch对象调用setOnGetBusLineSearchResultListener(new OnGetBusLineSearchResultListener())方法
+               开始搜索:BusLineSearch对象调用searchBusLine((new BusLineSearchOption().city(设置查询城市).uid(设置公交路线uid));
+               对监听接口中返回结果进行处理:接口监听方法获得BusLineResult结果对象,首先busLineResult == null || busLineResult.error != SearchResult.ERRORNO.NO_ERROR判断是否有结果
+                   有结果就可以调用getStations()方法获取站点信息集合添加Marker公交车图标的覆盖物,调用getSteps()获得路段信息集合,路段对象在调用getWayPoints()获取每个路段经过的地点坐标,从而获取所有路段坐标组成一个路线坐标集合,添加线覆盖物
+           最后不使用功能时记得释放PoiSearch对象和BusLineSearch对象资源</string>
     <string name="name_control_map">地图操作功能—MapControlDemo</string>
     <string name="demo_name_ui">UI控制功能</string>
     <string name="name_ui_setting_map">UI旋转缩放平移添加子控件等功能—UISettingsDemo</string>
@@ -171,8 +187,7 @@
     <string name="name_search_address_zuobiao_map">地理编码功能(坐标与地址之间的相互检索)—GeoCodeDemo</string>
 
     <string name="demo_name_bus">公交线路查询功能</string>
-    <string name="demo_title_bus">公交线路查询功能—BusLineDemo</string>
-    <string name="demo_desc_bus">介绍查询公交线路功能</string>
+    <string name="name_search_bus_line_map">公交线路查询功能—BusLineDemo</string>
     <string name="demo_name_offline">离线地图功能</string>
     <string name="demo_title_offline">离线地图功能—OfflineDemo</string>
     <string name="demo_desc_offline">介绍如何下载和使用离线地图</string>

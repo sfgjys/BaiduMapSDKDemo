@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
             new SingleFunctionBean(R.string.name_gexing_map, R.string.describe_gexing_map, BaseMapDemo.class),
             new SingleFunctionBean(R.string.name_fragment_map, R.string.describe_fragment_map, MapFragmentDemo.class),
             new SingleFunctionBean(R.string.name_tuceng_show_map, R.string.describe_tuceng_show_map, LayersDemo.class),
-            new SingleFunctionBean(R.string.name_multimap, R.string.describe_multimap, MultiMapViewDemo.class),
+            new SingleFunctionBean(R.string.name_multi_map, R.string.describe_multi_map, MultiMapViewDemo.class),
             new SingleFunctionBean(R.string.name_control_map, R.string.describe_control_map, MapControlDemo.class),
             new SingleFunctionBean(R.string.name_ui_setting_map, R.string.describe_ui_setting_map, UISettingDemo.class),
             new SingleFunctionBean(R.string.name_location_map, R.string.describe_location_map, LocationDemo.class),
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
             new SingleFunctionBean(R.string.demo_title_route, R.string.demo_desc_route, RoutePlanDemo.class),// 未完成
             new SingleFunctionBean(R.string.name_districsearch_map, R.string.describe_districsearch_map, DistrictSearchDemo.class),
             new SingleFunctionBean(R.string.name_search_bus_line_map, R.string.describe_search_bus_line_map, BusLineSearchDemo.class),
-            new SingleFunctionBean(R.string.demo_title_share, R.string.demo_desc_share, ShareDemo.class),
+            new SingleFunctionBean(R.string.name_search_share_url_map, R.string.describe_search_share_url_map, ShareDemo.class),
             new SingleFunctionBean(R.string.demo_title_offline, R.string.demo_desc_offline, OfflineDemo.class),
             new SingleFunctionBean(R.string.demo_title_radar, R.string.demo_desc_radar, RadarDemo.class),
             new SingleFunctionBean(R.string.demo_title_open_baidumap, R.string.demo_desc_open_baidumap, OpenBaiduMap.class),

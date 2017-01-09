@@ -2,18 +2,25 @@
 <resources>
 
     <string name="app_name">百度地图SDK DEMO</string>
-    <string name="demo_name_basemap">基本地图功能</string>
-    <string name="name_gexing_map">个性地图的使用</string>
-    <string name="demo_name_map_fragment">基于MapFragment的基本地图</string>
-    <string name="name_fragment_map">以Fragment替代Activity的使用地图</string>
-    <string name="demo_name_multimap">多地图展示</string>
-    <string name="name_multimap">多地图展示—MultiMapViewDemo</string>
-    <string name="demo_name_layers">图层展示</string>
+
     <string name="name_tuceng_show_map">对图层显示进行设置</string>
-    <string name="demo_name_control">地图操作功能</string>
+    <string name="name_multi_map">多地图展示—MultiMapViewDemo</string>
+    <string name="name_gexing_map">个性地图的使用</string>
+    <string name="name_fragment_map">以Fragment替代Activity的使用地图</string>
+    <string name="name_control_map">地图操作功能—MapControlDemo</string>
+    <string name="name_ui_setting_map">UI旋转缩放平移添加子控件等功能—UISettingsDemo</string>
+    <string name="name_location_map">定位图层展示与开启定位功能—LocationDemo</string>
+    <string name="name_fu_gai_wu_map">添加点、线、多边形、圆、文字覆盖物—GeometryDemo</string>
+    <string name="name_fu_gai_wu_yu_xia_two_map">Marker类型,GroundOverlay类型覆盖物-OverlayDemo</string>
+    <string name="name_search_poi_suggestion_search_map">在线建议查询功能与POI搜索功能—POISearchDemo</string>
+    <string name="name_search_address_zuobiao_map">地理编码功能(坐标与地址之间的相互检索)—GeoCodeDemo</string>
+    <string name="name_search_share_url_map">查询分享的短串 —ShareDemo</string>
+    <string name="name_heat_map">热力图(坐标点的密集图)功能—HeatMapDemo</string>
+    <string name="name_search_bus_line_map">公交线路查询功能—BusLineDemo</string>
+    <string name="name_districsearch_map">行政区域检索—DistrictSearchDemo</string>
 
     <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
-    <string name="describe_multimap">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
+    <string name="describe_multi_map">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
     <string name="describe_tuceng_show_map">设置地图显示卫星图;普通图;空白图三选一 设置显示热力图,路线实况图 核心是调用BaiduMap(地图控制器)的方法进行设置 该对象则是通过地图控件(MapView)获取</string>
     <string name="describe_gexing_map">该模块主要是说明了个性地图的显示:核心是在创建MapView / TextureMapView / WearMapView前必须先调用setCustomMapStylePath方法设置具体的个性模版文件，然后调用setMapCustomEnable来决定是否显示(setMapCustomEnable方法调用顺序无所谓)</string>
     <string name="describe_control_map">
@@ -157,72 +164,71 @@
                对监听接口中返回结果进行处理:接口监听方法获得BusLineResult结果对象,首先busLineResult == null || busLineResult.error != SearchResult.ERRORNO.NO_ERROR判断是否有结果
                    有结果就可以调用getStations()方法获取站点信息集合添加Marker公交车图标的覆盖物,调用getSteps()获得路段信息集合,路段对象在调用getWayPoints()获取每个路段经过的地点坐标,从而获取所有路段坐标组成一个路线坐标集合,添加线覆盖物
            最后不使用功能时记得释放PoiSearch对象和BusLineSearch对象资源</string>
-    <string name="name_control_map">地图操作功能—MapControlDemo</string>
+    <string name="describe_search_share_url_map">
+         POI详情,Location,路线规划分享url查询:
+           初始化: ShareUrlSearch.newInstance();
+           设置查询结果监听: setOnGetShareUrlResultListener(new OnGetShareUrlResultListener())
+           开启请求: POI详情 shareUrlSearch.requestPoiDetailShareUrl(new PoiDetailShareURLOption().poiUid(需要POI的uid));
+                    Location shareUrlSearch.requestLocationShareUrl(new LocationShareURLOption().location(需要Location地理坐标).snippet("通过短URL调起客户端时作为附加信息显示在名称下面").name(需要Location的地址名称));
+                    路线规划 shareUrlSearch.requestRouteShareUrl(new RouteShareURLOption().from(起始点坐标对象).to(终点坐标对象).routMode(行驶模式,例如:RouteShareMode.FOOT_ROUTE_SHARE_MODE,其余查api));如果行驶模式为公交还需要调用cityCode(int cityCode)方法设置城市id,如果有多线路,那还可以调用pn(int pn)设置要分享检索路线中的哪条
+           监听结果: onGetLocationShareUrlResult(ShareUrlResult result)位置分享URL结果回调
+                    onGetPoiDetailShareUrlResult(ShareUrlResult result)poi详情分享URL结果回调
+                    onGetRouteShareUrlResult(ShareUrlResult result)路线规划分享URL结果回调
+           最后不用的时候记得释放ShareUrlSearch对象</string>
+
     <string name="demo_name_ui">UI控制功能</string>
-    <string name="name_ui_setting_map">UI旋转缩放平移添加子控件等功能—UISettingsDemo</string>
-
     <string name="demo_name_location">定位图层展示</string>
-    <string name="name_location_map">定位图层展示与开启定位功能—LocationDemo</string>
-
     <string name="demo_name_geometry">自定义绘制功能，折线可点击</string>
-    <string name="name_fu_gai_wu_map">添加点、线、多边形、圆、文字覆盖物—GeometryDemo</string>
-
     <string name="demo_name_favorite">点收藏功能</string>
-    <string name="demo_title_favorite">点收藏功能—FavoriteDemo</string>
-    <string name="demo_desc_favorite">介绍如何创建、管理本地点数据</string>
     <string name="demo_name_radar">周边雷达功能</string>
-    <string name="demo_title_radar">周边雷达功能—RadarDemo</string>
-    <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
     <string name="demo_name_overlay">覆盖物功能</string>
-    <string name="name_fu_gai_wu_yu_xia_two_map">Marker类型,GroundOverlay类型覆盖物-OverlayDemo</string>
-
     <string name="demo_name_poi">POI搜索功能</string>
-    <string name="name_search_poi_suggestion_search_map">在线建议查询功能与POI搜索功能—POISearchDemo</string>
-
+    <string name="demo_name_basemap">基本地图功能</string>
+    <string name="demo_name_map_fragment">基于MapFragment的基本地图</string>
+    <string name="demo_name_multimap">多地图展示</string>
+    <string name="demo_name_layers">图层展示</string>
+    <string name="demo_name_control">地图操作功能</string>
     <string name="demo_name_route">路径规划功能</string>
-    <string name="demo_title_route">路径规划功能—RoutePlanDemo</string>
-    <string name="demo_title_poinearby">POI附近搜索功能</string>
-    <string name="demo_desc_route">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
     <string name="demo_name_geocode">地理编码功能</string>
-    <string name="name_search_address_zuobiao_map">地理编码功能(坐标与地址之间的相互检索)—GeoCodeDemo</string>
-
     <string name="demo_name_bus">公交线路查询功能</string>
-    <string name="name_search_bus_line_map">公交线路查询功能—BusLineDemo</string>
     <string name="demo_name_offline">离线地图功能</string>
+    <string name="demo_name_districsearch">行政区域检索</string>
+    <string name="demo_name_indoor">室内图功能</string>
+    <string name="demo_name_indoorsearch">室内图检索功能</string>
+    <string name="demo_name_share">短串分享</string>
+    <string name="demo_name_tileoverlay">瓦片图功能</string>
+    <string name="demo_name_heatmap">热力图功能</string>
+    <string name="demo_name_cloud">LBS.云检索功能</string>
+    <string name="demo_name_open_baidumap">调启百度地图</string>
+    <string name="demo_name_opengl">OpenGL绘制功能</string>
     <string name="demo_title_offline">离线地图功能—OfflineDemo</string>
     <string name="demo_desc_offline">介绍如何下载和使用离线地图</string>
-    <string name="demo_name_open_baidumap">调启百度地图</string>
     <string name="demo_title_open_baidumap">调启百度地图—OpenBaiduMap</string>
     <string name="demo_desc_open_baidumap">介绍如何调启百度地图实现自身业务功能</string>
-    <string name="demo_name_cloud">LBS.云检索功能</string>
     <string name="demo_title_cloud">LBS.云检索功能—CloudSearchDemo</string>
     <string name="demo_desc_cloud">介绍如何使用LBS.云检索用户自有数据</string>
-    <string name="demo_name_heatmap">热力图功能</string>
-    <string name="name_heat_map">热力图(坐标点的密集图)功能—HeatMapDemo</string>
-
-    <string name="demo_name_opengl">OpenGL绘制功能</string>
     <string name="demo_title_opengl">OpenGL绘制功能—OpenGLDemo</string>
     <string name="demo_title_cluster">点聚合功能—MarkerClusterDemo</string>
-    <string name="demo_name_tileoverlay">瓦片图功能</string>
     <string name="demo_desc_cluster">介绍如何实现多个Marker点的点聚合功能</string>
     <string name="demo_title_tileoverlay">瓦片图功能—TileOverlayDemo</string>
     <string name="demo_desc_tileoverlay">介绍如何在地图上添加自定义的瓦片图</string>
     <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
     <string name="demo_desc_texturemapview">地图由TextureView渲染</string>
-
-    <string name="name_districsearch_map">行政区域检索—DistrictSearchDemo</string>
-    <string name="demo_name_districsearch">行政区域检索</string>
-    <string name="demo_name_indoor">室内图功能</string>
+    <string name="demo_title_favorite">点收藏功能—FavoriteDemo</string>
+    <string name="demo_desc_favorite">介绍如何创建、管理本地点数据</string>
+    <string name="demo_title_radar">周边雷达功能—RadarDemo</string>
+    <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
+    <string name="demo_title_route">路径规划功能—RoutePlanDemo</string>
+    <string name="demo_title_poinearby">POI附近搜索功能</string>
+    <string name="demo_desc_route">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
     <string name="demo_title_indoor">室内图—IndoorMapDemo</string>
     <string name="demo_desc_indoor">介绍室内图功能，显示室内图及室内路线规划</string>
-    <string name="demo_name_indoorsearch">室内图检索功能</string>
     <string name="demo_title_indoorsearch">室内图检索—IndoorSearchDemo</string>
     <string name="demo_desc_indoorsearch">介绍在室内图中进行室内POI检索</string>
     <string name="demo_title_track_show">小车轨迹平滑移动</string>
     <string name="demo_desc_track_show">介绍小车轨迹平滑移动的实现</string>
-
-
     <string name="demo_desc_opengl">介绍如何使用OpenGL绘制在地图中进行绘制</string>
+
     <string name="key_error">"请在  DemoApplication.java文件输入正确的授权Key！\r\n申请地址：http://dev.baidu.com/wiki/static/imap/key/"</string>
     <string name="navi_tip">百度地图SDK支持通过相关的接口，调启百度地图客户端（v5.0以上）导航和Web端百度地图导航。</string>
     <string name="title_activity_cloud_search_demo">云检索使用介绍</string>
@@ -236,13 +242,9 @@
       \t\t全景图还提供了Item绘制能力，您可在第三个示例中查看具体使用方法。</string>
     <string name="panorama_poi_tips"> 首先根据关键词进行POI检索，点击地图上的POI点，根据POI的UID进入全景</string>
     <string name="panorama_geo_tips">单击地图以选取坐标点</string>
-    <string name="demo_title_share">短串分享功能 —ShareDemo</string>
-    <string name="demo_name_share">短串分享</string>
-    <string name="demo_desc_share">介绍关键词查询、suggestion查询和查看餐饮类Place详情页功能</string>
     <string name="share_tip">\t\t短串分享是指，用户搜索查询后得到的每一个地理位置结果将会对应一条短串（短链接），用户可以通过短信、邮件或第三方分享组件（如微博、微信等）把短串分享给其他用户从而实现地理位置信息的分享。当其他用户收到分享的短串后，点击短串即可打开手机上的百度地图客户端或者手机浏览器进行查看。\n\n
                 \t\t例如，用户搜索“百度大厦”后通过短信使用短串分享功能把该地点分享给好友，好友点击短信中的短串“http://j.map.baidu.com/XLCrk”后可以调起百度地图客户端或者手机浏览器查看“百度大厦”的地理位置信息。\n\n
-                \t\t目前短串分享功能暂时开放了“POI搜索结果分享”、“反向地理编码结果分享”和"路线规划路线结果分享(包含步行、骑行、驾车、公交)"，日后会开放更多的功能，欢迎广大开发者使用短
-</string>
+                \t\t目前短串分享功能暂时开放了“POI搜索结果分享”、“反向地理编码结果分享”和"路线规划路线结果分享(包含步行、骑行、驾车、公交)"，日后会开放更多的功能，欢迎广大开发者使用短</string>
     <string name="texturemap_hint">\t\t名称：TextureMapView（实现地图由TextureView
         渲染）\n\n
     \t\t前提：Android 4.0以上系统，并开启加速功能，才能使用TextureMapView \n\n

@@ -4,44 +4,35 @@
     <string name="app_name">百度地图SDK DEMO</string>
     <string name="demo_name_basemap">基本地图功能</string>
     <string name="name_gexing_map">个性地图的使用</string>
-    <string name="describe_gexing_map">该模块主要是说明了个性地图的显示:核心是在创建MapView / TextureMapView / WearMapView前必须先调用setCustomMapStylePath方法设置具体的个性模版文件，然后调用setMapCustomEnable来决定是否显示(setMapCustomEnable方法调用顺序无所谓)</string>
     <string name="demo_name_map_fragment">基于MapFragment的基本地图</string>
     <string name="name_fragment_map">以Fragment替代Activity的使用地图</string>
-    <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
     <string name="demo_name_multimap">多地图展示</string>
     <string name="name_multimap">多地图展示—MultiMapViewDemo</string>
-    <string name="describe_multimap">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
     <string name="demo_name_layers">图层展示</string>
     <string name="name_tuceng_show_map">对图层显示进行设置</string>
-    <string name="describe_tuceng_show_map">设置地图显示卫星图;普通图;空白图三选一 设置显示热力图,路线实况图 核心是调用BaiduMap(地图控制器)的方法进行设置 该对象则是通过地图控件(MapView)获取</string>
     <string name="demo_name_control">地图操作功能</string>
+
+    <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
+    <string name="describe_multimap">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
+    <string name="describe_tuceng_show_map">设置地图显示卫星图;普通图;空白图三选一 设置显示热力图,路线实况图 核心是调用BaiduMap(地图控制器)的方法进行设置 该对象则是通过地图控件(MapView)获取</string>
+    <string name="describe_gexing_map">该模块主要是说明了个性地图的显示:核心是在创建MapView / TextureMapView / WearMapView前必须先调用setCustomMapStylePath方法设置具体的个性模版文件，然后调用setMapCustomEnable来决定是否显示(setMapCustomEnable方法调用顺序无所谓)</string>
     <string name="describe_control_map">
         BaiduMap地图控制器可以设置单击，双击，长按地图监听回调事件; 三个回调事件都可以获取到LatLng对象,从而获取到点击点的经纬坐标
         其中单击地图事件内部又可以分为单击地图与单击地图中的POI点,单击地图获得LatLng,而单击地图中的POI点获得MapPoi对象,该对象可获取包含POI点经纬坐标的LatLng对象以及该兴趣点的名称和UID
         地图控制还可以调用getMapStatus();方法获取地图状态对象，从而获取各种地图状态
         BaiduMap地图控制器可以设置地图状态变化监听回调事件
         BaiduMap地图控制器也可以进行地图状态的改变,但前提需要一个MapStatusUpdate对象(具体的地图状态改变在该对象中设置),然后将MapStatusUpdate对象作为参数调用animateMapStatus方法或者setMapStatus方法(前者有动画,后者没有)
-        BaiduMap地图控制器截图:调用snapshot方法,回调接口会返回一个Bitmap对象,如此就可以进行图片保存,例子: bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-    </string>
-    <string name="name_control_map">地图操作功能—MapControlDemo</string>
-    <string name="demo_name_ui">UI控制功能</string>
-    <string name="name_ui_setting_map">UI旋转缩放平移添加子控件等功能—UISettingsDemo</string>
+        BaiduMap地图控制器截图:调用snapshot方法,回调接口会返回一个Bitmap对象,如此就可以进行图片保存,例子: bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)</string>
     <string name="describe_ui_setting_map">
         BaiduMap地图控制器调用getUiSettings();可获的UiSettings对象该对象可设置 是否允许指南针;是否允许俯视手势;是否允许旋转手势;是否允许拖拽手势;是否允许缩放手势;是否允许所有手势操作
         其中是否允许指南针有一点需要注意:一开始指南针是没有出现的,只有在旋转或者俯视变化时才会出现指南针,接着指南针会一直出现 直到设置是否出现指南针才会出现变化
         BaiduMap地图控制器调用showMapPoi:是否显示底图的poi点的标注
-        给父控件MapView添加子控件: 先BaiduMap地图控制器调用setPadding(根据具体情况而定),然后在创建具体的子控件,与子控件具体的布局MapViewLayoutParams,最后将两者作为参数添加进MapView
-    </string>
-    <string name="demo_name_location">定位图层展示</string>
-    <string name="name_location_map">定位图层展示与开启定位功能—LocationDemo</string>
+        给父控件MapView添加子控件: 先BaiduMap地图控制器调用setPadding(根据具体情况而定),然后在创建具体的子控件,与子控件具体的布局MapViewLayoutParams,最后将两者作为参数添加进MapView</string>
     <string name="describe_location_map">
         开启定位功能:创建LocationClient对象,并给LocationClient对象注册定位监听接口(当定位有了结果可以在接口中进行相应处理),然后创建LocationClientOption定位参数配置对象,可以在该对象中进行一系列定位参数配置,
         在将LocationClientOption设置进定位客户端对象中。这样准备工作做好就可使用LocationClient对象调用start()方法开启定位功能,最后结束时记得调用stop()方法关闭定位功能。
         开启定位图层与显示定位点: 这个需求的一切前提setMyLocationEnabled(true)。然后就可以创建MyLocationData对象(可以根据具体定位结果去设置对象的各个参数),该对象代表地图上定位时显示的定位点的样式数据,
-        接着创建MyLocationConfiguration对象,该对象代笔地图上定位时显示的定位点的具体样式展现。最后通过地图控制器,将两个对象作为参数分别调用 setMyLocationData setMyLocationConfigeration方法。
-    </string>
-    <string name="demo_name_geometry">自定义绘制功能，折线可点击</string>
-    <string name="name_fu_gai_wu_map">添加点、线、多边形、圆、文字覆盖物—GeometryDemo</string>
+        接着创建MyLocationConfiguration对象,该对象代笔地图上定位时显示的定位点的具体样式展现。最后通过地图控制器,将两个对象作为参数分别调用 setMyLocationData setMyLocationConfigeration方法。</string>
     <string name="describe_fu_gai_wu_map">
           添加线类型的覆盖物
           首先创建一个集合用来存储LatLng坐标,最少两个LatLng,两个时为直线,两个以上为折线
@@ -64,16 +55,7 @@
           添加多边形类型的覆盖物
                PolygonOptions
           添加文本类型的覆盖物
-               TextOptions  bgColor(0xAAFFFF00)文字底部背景颜色  fontColor(0xFFFF00FF)文字本身颜色  rotate(-30)设置文字覆盖物旋转角度,逆时针   position(llText);设置文字覆盖物地理坐标
-    </string>
-    <string name="demo_name_favorite">点收藏功能</string>
-    <string name="demo_title_favorite">点收藏功能--FavoriteDemo</string>
-    <string name="demo_desc_favorite">介绍如何创建、管理本地点数据</string>
-    <string name="demo_name_radar">周边雷达功能</string>
-    <string name="demo_title_radar">周边雷达功能--RadarDemo</string>
-    <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
-    <string name="demo_name_overlay">覆盖物功能</string>
-    <string name="name_fu_gai_wu_yu_xia_two_map">Marker类型,GroundOverlay类型覆盖物-OverlayDemo</string>
+               TextOptions  bgColor(0xAAFFFF00)文字底部背景颜色  fontColor(0xFFFF00FF)文字本身颜色  rotate(-30)设置文字覆盖物旋转角度,逆时针   position(llText);设置文字覆盖物地理坐标</string>
     <string name="describe_fu_gai_wu_yu_xia_two_map">
          添加Marker类型的覆盖物
                创建MarkerOptions配置类对象,调用position()方法设置坐标;    icon(传入经过BitmapDescriptor转换的图标图像)设置Marker的图像;   draggable(true/false)设置是否允许拖拽,默认不允许;
@@ -93,10 +75,7 @@
                    构造函数二: InfoWindow(View view, LatLng position, int yOffset)
                    两个构造函数的参数二:InfoWindow 显示的地理位置;参数三:InfoWindow Y 轴偏移量
                    构一的参数一是将要显示的资源通过BitmapDescriptor.from进行转换,如此参数四就成了点击InfoWindow的监听事件 这样创建的InfoWindow其只有一个点击事件就是点击InfoWindow本身,过于单一
-                   而构二就比较多元化,参数一需要的是一个View,如此我们可以打气一个多元化布局进去,设置多种点击显示事件
-    </string>
-    <string name="demo_name_poi">POI搜索功能</string>
-    <string name="name_search_poi_suggestion_search_map">在线建议查询功能与POI搜索功能—POISearchDemo</string>
+                   而构二就比较多元化,参数一需要的是一个View,如此我们可以打气一个多元化布局进去,设置多种点击显示事件</string>
     <string name="describe_search_poi_suggestion_search_map">
                在线建议查询功能 : SuggestionSearch
                    要使用该功能,需要一个SuggestionSearch对象(SuggestionSearch.newInstance():类调用静态方法获得实例对象),当我们不再需要使用该功能时记得使用SuggestionSearch对象调用destroy()方法从而释放对象资源;
@@ -125,15 +104,8 @@
                            使用该result.error == SearchResult.ERRORNO.NO_ERROR判断条件去判断是否有结果,如果有结果那PoiDetailResult对象可以通过get系列方法获得具体信息
                        onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) : POI室内检索的请求检索的结果会返回到该方法内
                            TODO 暂时空着
-            
-               LatLngBounds范围坐标对象: 该对象的建造者的include(LatLng point)方法可以不断调用,最后内部进行算法,所有坐标都在同一个矩形区域内,该对象就代表该区域
-    </string>
-    <string name="demo_name_route">路径规划功能</string>
-    <string name="demo_title_route">路径规划功能--RoutePlanDemo</string>
-    <string name="demo_title_poinearby">POI附近搜索功能</string>
-    <string name="demo_desc_route">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
-    <string name="demo_name_geocode">地理编码功能</string>
-    <string name="name_search_address_zuobiao_map">地理编码功能(坐标与地址之间的相互检索)—GeoCodeDemo</string>
+
+               LatLngBounds范围坐标对象: 该对象的建造者的include(LatLng point)方法可以不断调用,最后内部进行算法,所有坐标都在同一个矩形区域内,该对象就代表该区域</string>
     <string name="describe_search_address_zuobiao_map">
              地理编码搜索（用地址检索对应的坐标,这里的地址最好用列表的形式展示出进行选择）、反地理编码搜索（用坐标检索对应的地址）
              要实现上面两个功能,需要的是GeoCoder地理编码查询接口,使用步骤:
@@ -144,22 +116,7 @@
                    再来: GeoCoder对象调用geocode(new GeoCodeOption().city(此处传入城市字符串).address(此处传入地址字符串))方法,该方法是通过地址来检索对应的坐标
                            geocode方法的检索结果会返回到onGetGeoCodeResult(GeoCodeResult result)接口方法,result就是结果对象,该对象可以获取坐标对象与地址信息
                    最后: 不再使用本功能时:GeoCoder对象调用destroy()方法释放资源
-                   注意: 在两个回调接口中,要记得判断是否有检索结果, 判断条件result == null || result.error != SearchResult.ERRORNO.NO_ERROR —> 没有结果
-    </string>
-    <string name="demo_name_bus">公交线路查询功能</string>
-    <string name="demo_title_bus">公交线路查询功能--BusLineDemo</string>
-    <string name="demo_desc_bus">介绍查询公交线路功能</string>
-    <string name="demo_name_offline">离线地图功能</string>
-    <string name="demo_title_offline">离线地图功能--OfflineDemo</string>
-    <string name="demo_desc_offline">介绍如何下载和使用离线地图</string>
-    <string name="demo_name_open_baidumap">调启百度地图</string>
-    <string name="demo_title_open_baidumap">调启百度地图--OpenBaiduMap</string>
-    <string name="demo_desc_open_baidumap">介绍如何调启百度地图实现自身业务功能</string>
-    <string name="demo_name_cloud">LBS.云检索功能</string>
-    <string name="demo_title_cloud">LBS.云检索功能--CloudSearchDemo</string>
-    <string name="demo_desc_cloud">介绍如何使用LBS.云检索用户自有数据</string>
-    <string name="demo_name_heatmap">热力图功能</string>
-    <string name="name_heat_map">热力图(坐标点的密集图)功能--HeatMapDemo</string>
+                   注意: 在两个回调接口中,要记得判断是否有检索结果, 判断条件result == null || result.error != SearchResult.ERRORNO.NO_ERROR —> 没有结果</string>
     <string name="describe_heat_map">
          热力图:在缩放到比例尺最小的时候,热力图没啥效果,因为热力图是在高比例尺的时候,看一块区域内点的密集程度,根据其密集程度来渐变颜色,这里的热力并不是温度的意思
          开启热力图:地图控制器mMapControl.addHeatMap(热力图类HeatMap的对象); 移除热力图 已经开启过的热力图类HeatMap的对象调用removeHeatMap();
@@ -171,17 +128,7 @@
                    // 渐变颜色对象
                    Gradient gradient = new Gradient(DEFAULT_GRADIENT_COLORS, DEFAULT_GRADIENT_START_POINTS);
                    // data(data)传递坐标集合 gradient(gradient)传递渐变颜色对象 opacity(0.6)透明度 radius(12)坐标点的半径,单位px
-                   HeatMap heatmap = new HeatMap.Builder().data(data).gradient(gradient).opacity(0.6).radius(12).build();
-    </string>
-    <string name="demo_name_opengl">OpenGL绘制功能</string>
-    <string name="demo_title_opengl">OpenGL绘制功能--OpenGLDemo</string>
-    <string name="demo_title_cluster">点聚合功能--MarkerClusterDemo</string>
-    <string name="demo_name_tileoverlay">瓦片图功能</string>
-    <string name="demo_desc_cluster">介绍如何实现多个Marker点的点聚合功能</string>
-    <string name="demo_title_tileoverlay">瓦片图功能--TileOverlayDemo</string>
-    <string name="demo_desc_tileoverlay">介绍如何在地图上添加自定义的瓦片图</string>
-    <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
-    <string name="demo_desc_texturemapview">地图由TextureView渲染</string>
+                   HeatMap heatmap = new HeatMap.Builder().data(data).gradient(gradient).opacity(0.6).radius(12).build();</string>
     <string name="describe_districsearch_map">
          检索行政区功能模块:
            初始化: DistrictSearch.newInstance()获得DistrictSearch对象;
@@ -193,15 +140,68 @@
                        获取行政区域编码:getCityCode()
                        获取行政区域名称:getCityName()
                        获取行政区域边界坐标点:getPolylines() 由于行政区可能有两块地方不重合,所以坐标集合可能有两个以上,用另一个集合存放多个坐标集合
-           销毁: 当不再使用检索行政区功能模块时,记得释放对象资源 DistrictSearch对象调用destroy()方法;
-    </string>
-    <string name="name_districsearch_map">行政区域检索--DistrictSearchDemo</string>
+           销毁: 当不再使用检索行政区功能模块时,记得释放对象资源 DistrictSearch对象调用destroy()方法;</string>
+    <string name="name_control_map">地图操作功能—MapControlDemo</string>
+    <string name="demo_name_ui">UI控制功能</string>
+    <string name="name_ui_setting_map">UI旋转缩放平移添加子控件等功能—UISettingsDemo</string>
+
+    <string name="demo_name_location">定位图层展示</string>
+    <string name="name_location_map">定位图层展示与开启定位功能—LocationDemo</string>
+
+    <string name="demo_name_geometry">自定义绘制功能，折线可点击</string>
+    <string name="name_fu_gai_wu_map">添加点、线、多边形、圆、文字覆盖物—GeometryDemo</string>
+
+    <string name="demo_name_favorite">点收藏功能</string>
+    <string name="demo_title_favorite">点收藏功能—FavoriteDemo</string>
+    <string name="demo_desc_favorite">介绍如何创建、管理本地点数据</string>
+    <string name="demo_name_radar">周边雷达功能</string>
+    <string name="demo_title_radar">周边雷达功能—RadarDemo</string>
+    <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
+    <string name="demo_name_overlay">覆盖物功能</string>
+    <string name="name_fu_gai_wu_yu_xia_two_map">Marker类型,GroundOverlay类型覆盖物-OverlayDemo</string>
+
+    <string name="demo_name_poi">POI搜索功能</string>
+    <string name="name_search_poi_suggestion_search_map">在线建议查询功能与POI搜索功能—POISearchDemo</string>
+
+    <string name="demo_name_route">路径规划功能</string>
+    <string name="demo_title_route">路径规划功能—RoutePlanDemo</string>
+    <string name="demo_title_poinearby">POI附近搜索功能</string>
+    <string name="demo_desc_route">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
+    <string name="demo_name_geocode">地理编码功能</string>
+    <string name="name_search_address_zuobiao_map">地理编码功能(坐标与地址之间的相互检索)—GeoCodeDemo</string>
+
+    <string name="demo_name_bus">公交线路查询功能</string>
+    <string name="demo_title_bus">公交线路查询功能—BusLineDemo</string>
+    <string name="demo_desc_bus">介绍查询公交线路功能</string>
+    <string name="demo_name_offline">离线地图功能</string>
+    <string name="demo_title_offline">离线地图功能—OfflineDemo</string>
+    <string name="demo_desc_offline">介绍如何下载和使用离线地图</string>
+    <string name="demo_name_open_baidumap">调启百度地图</string>
+    <string name="demo_title_open_baidumap">调启百度地图—OpenBaiduMap</string>
+    <string name="demo_desc_open_baidumap">介绍如何调启百度地图实现自身业务功能</string>
+    <string name="demo_name_cloud">LBS.云检索功能</string>
+    <string name="demo_title_cloud">LBS.云检索功能—CloudSearchDemo</string>
+    <string name="demo_desc_cloud">介绍如何使用LBS.云检索用户自有数据</string>
+    <string name="demo_name_heatmap">热力图功能</string>
+    <string name="name_heat_map">热力图(坐标点的密集图)功能—HeatMapDemo</string>
+
+    <string name="demo_name_opengl">OpenGL绘制功能</string>
+    <string name="demo_title_opengl">OpenGL绘制功能—OpenGLDemo</string>
+    <string name="demo_title_cluster">点聚合功能—MarkerClusterDemo</string>
+    <string name="demo_name_tileoverlay">瓦片图功能</string>
+    <string name="demo_desc_cluster">介绍如何实现多个Marker点的点聚合功能</string>
+    <string name="demo_title_tileoverlay">瓦片图功能—TileOverlayDemo</string>
+    <string name="demo_desc_tileoverlay">介绍如何在地图上添加自定义的瓦片图</string>
+    <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
+    <string name="demo_desc_texturemapview">地图由TextureView渲染</string>
+
+    <string name="name_districsearch_map">行政区域检索—DistrictSearchDemo</string>
     <string name="demo_name_districsearch">行政区域检索</string>
     <string name="demo_name_indoor">室内图功能</string>
-    <string name="demo_title_indoor">室内图--IndoorMapDemo</string>
+    <string name="demo_title_indoor">室内图—IndoorMapDemo</string>
     <string name="demo_desc_indoor">介绍室内图功能，显示室内图及室内路线规划</string>
     <string name="demo_name_indoorsearch">室内图检索功能</string>
-    <string name="demo_title_indoorsearch">室内图检索--IndoorSearchDemo</string>
+    <string name="demo_title_indoorsearch">室内图检索—IndoorSearchDemo</string>
     <string name="demo_desc_indoorsearch">介绍在室内图中进行室内POI检索</string>
     <string name="demo_title_track_show">小车轨迹平滑移动</string>
     <string name="demo_desc_track_show">介绍小车轨迹平滑移动的实现</string>
@@ -221,7 +221,7 @@
       \t\t全景图还提供了Item绘制能力，您可在第三个示例中查看具体使用方法。</string>
     <string name="panorama_poi_tips"> 首先根据关键词进行POI检索，点击地图上的POI点，根据POI的UID进入全景</string>
     <string name="panorama_geo_tips">单击地图以选取坐标点</string>
-    <string name="demo_title_share">短串分享功能 --ShareDemo</string>
+    <string name="demo_title_share">短串分享功能 —ShareDemo</string>
     <string name="demo_name_share">短串分享</string>
     <string name="demo_desc_share">介绍关键词查询、suggestion查询和查看餐饮类Place详情页功能</string>
     <string name="share_tip">\t\t短串分享是指，用户搜索查询后得到的每一个地理位置结果将会对应一条短串（短链接），用户可以通过短信、邮件或第三方分享组件（如微博、微信等）把短串分享给其他用户从而实现地理位置信息的分享。当其他用户收到分享的短串后，点击短串即可打开手机上的百度地图客户端或者手机浏览器进行查看。\n\n

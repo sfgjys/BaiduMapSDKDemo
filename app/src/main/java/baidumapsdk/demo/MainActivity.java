@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
             new SingleFunctionBean(R.string.name_heat_map, R.string.describe_heat_map, HeatMapDemo.class),
             new SingleFunctionBean(R.string.name_search_address_zuobiao_map, R.string.describe_search_address_zuobiao_map, GeoCoderDemo.class),
             new SingleFunctionBean(R.string.name_search_poi_suggestion_search_map, R.string.describe_search_poi_suggestion_search_map, PoiSearchDemo.class),
-            new SingleFunctionBean(R.string.demo_title_route, R.string.demo_desc_route, RoutePlanDemo.class),
+            new SingleFunctionBean(R.string.demo_title_route, R.string.demo_desc_route, RoutePlanDemo.class),// 未完成
             new SingleFunctionBean(R.string.name_districsearch_map, R.string.describe_districsearch_map, DistrictSearchDemo.class),
             new SingleFunctionBean(R.string.name_search_bus_line_map, R.string.describe_search_bus_line_map, BusLineSearchDemo.class),
             new SingleFunctionBean(R.string.demo_title_share, R.string.demo_desc_share, ShareDemo.class),

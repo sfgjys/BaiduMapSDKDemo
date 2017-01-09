@@ -182,8 +182,20 @@
     <string name="demo_desc_tileoverlay">介绍如何在地图上添加自定义的瓦片图</string>
     <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
     <string name="demo_desc_texturemapview">地图由TextureView渲染</string>
-    <string name="demo_desc_districsearch">介绍如何使用行政区域检索，并绘制区域边界</string>
-    <string name="demo_title_districsearch">行政区域检索--DistrictSearchDemo</string>
+    <string name="describe_districsearch_map">
+         检索行政区功能模块:
+           初始化: DistrictSearch.newInstance()获得DistrictSearch对象;
+           设置监听: DistrictSearch对象调用setOnDistrictSearchListener(传入OnGetDistricSearchResultListener()接口)方法;
+           开启检索: DistrictSearch对象调用searchDistrict(传入参数为行政区检索配置对象,配置对象需要调用设置城市名称的cityName方法,和设置行政区名称的districtName方法)方法
+           结果: OnGetDistricSearchResultListener接口返回的结果为DistrictResult对象,
+                   DistrictResult对象有以下四个方法:
+                        获取行政区域中心点:getCenterPt()
+                       获取行政区域编码:getCityCode()
+                       获取行政区域名称:getCityName()
+                       获取行政区域边界坐标点:getPolylines() 由于行政区可能有两块地方不重合,所以坐标集合可能有两个以上,用另一个集合存放多个坐标集合
+           销毁: 当不再使用检索行政区功能模块时,记得释放对象资源 DistrictSearch对象调用destroy()方法;
+    </string>
+    <string name="name_districsearch_map">行政区域检索--DistrictSearchDemo</string>
     <string name="demo_name_districsearch">行政区域检索</string>
     <string name="demo_name_indoor">室内图功能</string>
     <string name="demo_title_indoor">室内图--IndoorMapDemo</string>

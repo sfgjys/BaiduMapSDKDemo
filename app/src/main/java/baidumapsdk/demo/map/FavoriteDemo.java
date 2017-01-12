@@ -30,30 +30,44 @@ import com.baidu.mapapi.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import baidumapsdk.demo.R;
 
 /**
  * 演示如何使用本地点收藏功能
  */
-public class FavoriteDemo extends Activity implements OnMapLongClickListener, 
-        OnMarkerClickListener, OnMapClickListener {
+public class FavoriteDemo extends Activity {
 
     // 地图相关
     private MapView mMapView;
-    private BaiduMap mBaiduMap;
+    private BaiduMap mMapControl;
 
     // 界面控件相关
-    private EditText locationText;
-    private EditText nameText;
-    private View mPop;
-    private View mModify;
+    private EditText wantCollectAddressLocation;
+    private EditText wantCollectAddressName;
+    private View clickMarkerPopup;
     EditText mdifyName;
     // 保存点中的点id
     private String currentID;
     // 现实marker的图标
-    BitmapDescriptor bdA = BitmapDescriptorFactory
-            .fromResource(R.drawable.icon_marka);
-    List<Marker> markers = new ArrayList<Marker>();
+    BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.icon_marka);
+    List<Marker> markers = new ArrayList<>();
+
+
+    /*
+    * 点收藏功能:FavoriteManager(核心类)
+    *   收藏点配置类:FavoritePoiInfo 必须设置poi点名称(poiName(java.lang.String name)),必须设置poi点坐标(pt(LatLng pt)),可选设置poi点uid,可选设置poi点地址,可选设置poi点所在城市名
+    *               注意: 在完成FavoritePoiInfo的创建和设置后,其id会自动生成,可通过getID()获取POI点的id
+    *   具体的功能方法: 使用下面方法的前提->初始化:FavoriteManager.getInstance().init();  (FavoriteManager.getInstance()是获取实例)
+    *       将一个已经配置好的FavoritePoiInfo添加进行添加:add(FavoritePoiInfo poiInfo)
+    *       调用方法可以直接清空所有添加的FavoritePoiInfo:clearAllFavPois()
+    *       根据指定的id可清除对应的FavoritePoiInfo:deleteFavPoi(java.lang.String id)
+    *       调用方法可以直接获取所有已经添加的FavoritePoiInfo的集合:getAllFavPois()
+    *       根据指定的id可获取对应的FavoritePoiInfo:getFavPoi(java.lang.String id)
+    *       根据指定的id可将重新设置的FavoritePoiInfo替换圆FavoritePoiInfo:updateFavPoi(java.lang.String id, FavoritePoiInfo info)
+    *   最后不用FavoriteManager是记得调用destroy()
+    * */
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,10 +75,56 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
         setContentView(R.layout.activity_favorite);
         // 初始化地图
         mMapView = (MapView) findViewById(R.id.bmapView);
-        mBaiduMap = mMapView.getMap();
-        mBaiduMap.setOnMapLongClickListener(this);
-        mBaiduMap.setOnMarkerClickListener(this);
-        mBaiduMap.setOnMapClickListener(this);
+        mMapControl = mMapView.getMap();
+
+
+        // 获取长按点的坐标,并将坐标设置给wantCollectAddressLocation控件
+        mMapControl.setOnMapLongClickListener(new OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                wantCollectAddressLocation.setText(String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude));
+            }
+
+            public void text() {
+            }
+        });
+        // 点击Marker展示InfoWindow,该InfoWindow可以修改该Marker的名称,可以删除本Marker
+        mMapControl.setOnMarkerClickListener(new OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                mMapControl.hideInfoWindow();// 先清除InfoWindow
+                if (marker == null) {
+                    return false;
+                }
+                // 在以clickMarkerPopup控件为基础展示InfoWindow
+                InfoWindow mInfoWindow = new InfoWindow(clickMarkerPopup, marker.getPosition(), -47);
+                mMapControl.showInfoWindow(mInfoWindow);
+                // 以marker的坐标为中新更新地图状态
+                MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(marker.getPosition());
+                mMapControl.setMapStatus(update);
+
+                // 获取在展示该Marker时通过bundle放入的id数据
+                currentID = marker.getExtraInfo().getString("id");
+                return true;
+            }
+
+            public void text() {
+            }
+        });
+        // 单机地图清除地图上存在的InfoWindow
+        mMapControl.setOnMapClickListener(new OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng point) {
+                mMapControl.hideInfoWindow();
+            }
+
+            @Override
+            public boolean onMapPoiClick(MapPoi poi) {
+                return false;
+            }
+        });
+
+
         // 初始化收藏夹
         FavoriteManager.getInstance().init();
         // 初始化UI
@@ -72,66 +132,64 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
     }
 
     public void initUI() {
-        locationText = (EditText) findViewById(R.id.pt);
-        nameText = (EditText) findViewById(R.id.name);
+        wantCollectAddressLocation = (EditText) findViewById(R.id.pt);
+        wantCollectAddressName = (EditText) findViewById(R.id.name);
         LayoutInflater mInflater = getLayoutInflater();
-        mPop = (View) mInflater.inflate(R.layout.activity_favorite_infowindow, null, false);
+        clickMarkerPopup = (View) mInflater.inflate(R.layout.activity_favorite_infowindow, null, false);
     }
 
     /**
      * 添加收藏点
-     *
-     * @param v
      */
     public void saveClick(View v) {
-        if (nameText.getText().toString() == null || nameText.getText().toString().equals("")) {
-            Toast.makeText(FavoriteDemo.this, "名称必填", Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }
-        if (locationText.getText().toString() == null || locationText.getText().toString().equals("")) {
-            Toast.makeText(FavoriteDemo.this, "坐标点必填", Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }
-        FavoritePoiInfo info = new FavoritePoiInfo();
-        info.poiName(nameText.getText().toString());
 
-        LatLng pt;
+        // 要想收藏点,必须要有点的名称与坐标
+        if (wantCollectAddressName.getText().toString() == null || wantCollectAddressName.getText().toString().equals("")) {
+            Toast.makeText(FavoriteDemo.this, "名称必填", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (wantCollectAddressLocation.getText().toString() == null || wantCollectAddressLocation.getText().toString().equals("")) {
+            Toast.makeText(FavoriteDemo.this, "坐标点必填", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        FavoritePoiInfo favoritePoiInfo = new FavoritePoiInfo();
+        // 设置点收藏的名称
+        favoritePoiInfo.poiName(wantCollectAddressName.getText().toString());
+
+        LatLng latLng;
         try {
-            String strPt = locationText.getText().toString();
+            // 从wantCollectAddressLocation获取坐标
+            String strPt = wantCollectAddressLocation.getText().toString();
             String lat = strPt.substring(0, strPt.indexOf(","));
             String lng = strPt.substring(strPt.indexOf(",") + 1);
-            pt = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-            info.pt(pt);
-            if (FavoriteManager.getInstance().add(info) == 1) {
+            // 将Stringr格式的坐标转换为double创建坐标对象LatLng
+            latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+            // 将坐标对象设置进FavoritePoiInfo对象
+            favoritePoiInfo.pt(latLng);
+
+            if (FavoriteManager.getInstance().add(favoritePoiInfo) == 1) {// add方法返回值-2:收藏夹已满，-1:重名或名称为空，0：添加失败，1：添加成功
                 Toast.makeText(FavoriteDemo.this, "添加成功", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(FavoriteDemo.this, "添加失败", Toast.LENGTH_LONG).show();
             }
-
         } catch (Exception e) {
-            // TODO: handle exception
-            Toast.makeText(FavoriteDemo.this, "坐标解析错误", Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(FavoriteDemo.this, "坐标解析错误", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     /**
      * 修改收藏点
-     *
-     * @param v
      */
     public void modifyClick(View v) {
-        mBaiduMap.hideInfoWindow();
+        mMapControl.hideInfoWindow();
         // 弹框修改
         LayoutInflater mInflater = getLayoutInflater();
-        mModify = (LinearLayout) mInflater.inflate(R.layout.activity_favorite_alert, null);
+        View mModify = (LinearLayout) mInflater.inflate(R.layout.activity_favorite_alert, null);
         mdifyName = (EditText) mModify.findViewById(R.id.modifyedittext);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(mModify);
+        // 根据id获取FavoritePoiInfo信息对象中的名称,将名称设置给ui等待使用人去修改
         String oldName = FavoriteManager.getInstance().getFavPoi(currentID).getPoiName();
         mdifyName.setText(oldName);
         builder.setPositiveButton("确认", new OnClickListener() {
@@ -139,9 +197,10 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
             public void onClick(DialogInterface dialog, int which) {
                 String newName = mdifyName.getText().toString();
                 if (newName != null && !newName.equals("")) {
-                    // modify
+                    // 根据id获取FavoritePoiInfo信息对象
                     FavoritePoiInfo info = FavoriteManager.getInstance().getFavPoi(currentID);
-                    info.poiName(newName);
+                    info.poiName(newName);// 将新的名称设置覆盖原先的名称变量
+                    // 然后调用FavoritePoiInfo的updateFavPoi方法,将id和新的FavoritePoiInfo对象作为参数更新id对应的原FavoritePoiInfo对象
                     if (FavoriteManager.getInstance().updateFavPoi(currentID, info)) {
                         Toast.makeText(FavoriteDemo.this, "修改成功", Toast.LENGTH_LONG).show();
                     }
@@ -165,10 +224,9 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
 
     /**
      * 删除一个指定点
-     *
-     * @param v
      */
     public void deleteOneClick(View v) {
+        // 先根据id删除收藏夹中的点信息,然后在将地图上对应的Marker移除
         if (FavoriteManager.getInstance().deleteFavPoi(currentID)) {
             Toast.makeText(FavoriteDemo.this, "删除点成功", Toast.LENGTH_LONG).show();
             if (markers != null) {
@@ -176,7 +234,7 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
                     if (markers.get(i).getExtraInfo().getString("id").equals(currentID)) {
                         markers.get(i).remove();
                         markers.remove(i);
-                        mBaiduMap.hideInfoWindow();
+                        mMapControl.hideInfoWindow();
                         break;
                     }
                 }
@@ -188,12 +246,10 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
 
     /**
      * 获取全部收藏点
-     *
-     * @param v
      */
     public void getAllClick(View v) {
-        mBaiduMap.clear();
-        List<FavoritePoiInfo> list = FavoriteManager.getInstance().getAllFavPois();
+        mMapControl.clear();
+        List<FavoritePoiInfo> list = FavoriteManager.getInstance().getAllFavPois();// 获取所有收藏点FavoritePoiInfo信息对象的集合
         if (list == null || list.size() == 0) {
             Toast.makeText(FavoriteDemo.this, "没有收藏点", Toast.LENGTH_LONG).show();
             return;
@@ -201,25 +257,26 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
         // 绘制在地图
         markers.clear();
         for (int i = 0; i < list.size(); i++) {
-            MarkerOptions option = new MarkerOptions().icon(bdA).position(list.get(i).getPt());
+            // 将FavoritePoiInfo对象中的坐标对象通过position()方法进行设置
+            MarkerOptions option = new MarkerOptions().icon(bitmapDescriptor).position(list.get(i).getPt());
+
+            // 通过bundle对象将FavoritePoiInfo对象的id(该id在通过坐标与名称创建FavoritePoiInfo对象时就自动生成了)设置进Marker
             Bundle b = new Bundle();
             b.putString("id", list.get(i).getID());
             option.extraInfo(b);
-            markers.add((Marker) mBaiduMap.addOverlay(option));
+            markers.add((Marker) mMapControl.addOverlay(option));
         }
-
     }
 
     /**
      * 删除全部点
-     *
-     * @param v
      */
     public void deleteAllClick(View v) {
+        // 清空所有收藏点
         if (FavoriteManager.getInstance().clearAllFavPois()) {
             Toast.makeText(FavoriteDemo.this, "全部删除成功", Toast.LENGTH_LONG).show();
-            mBaiduMap.clear();
-            mBaiduMap.hideInfoWindow();
+            mMapControl.clear();
+            mMapControl.hideInfoWindow();
         } else {
             Toast.makeText(FavoriteDemo.this, "全部删除失败", Toast.LENGTH_LONG).show();
         }
@@ -243,45 +300,11 @@ public class FavoriteDemo extends Activity implements OnMapLongClickListener,
     protected void onDestroy() {
         // 释放收藏夹功能资源
         FavoriteManager.getInstance().destroy();
-        bdA.recycle();
+        bitmapDescriptor.recycle();
         // MapView的生命周期与Activity同步，当activity销毁时需调用MapView.destroy()
         mMapView.onDestroy();
-        mBaiduMap = null;
+        mMapControl = null;
         super.onDestroy();
-    }
-
-
-    @Override
-    public void onMapLongClick(LatLng point) {
-        // TODO Auto-generated method stub
-        locationText.setText(String.valueOf(point.latitude) + "," + String.valueOf(point.longitude));
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        mBaiduMap.hideInfoWindow();
-        // TODO Auto-generated method stub
-        if (marker == null) {
-            return false;
-        }
-        InfoWindow mInfoWindow = new InfoWindow(mPop, marker.getPosition(), -47);
-        mBaiduMap.showInfoWindow(mInfoWindow);
-        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(marker.getPosition());
-        mBaiduMap.setMapStatus(update);
-        currentID = marker.getExtraInfo().getString("id");
-        return true;
-    }
-
-    @Override
-    public void onMapClick(LatLng point) {
-        // TODO Auto-generated method stub
-        mBaiduMap.hideInfoWindow();
-    }
-
-    @Override
-    public boolean onMapPoiClick(MapPoi poi) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 }

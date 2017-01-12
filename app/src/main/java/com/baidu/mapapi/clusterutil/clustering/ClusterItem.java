@@ -9,13 +9,10 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.model.LatLng;
 
 /**
- * ClusterItem represents a marker on the map.
+ * 该接口代表的是聚合功能中,聚合的单个条目,这个条目对象需要可以获得本条目的坐标对象LatLng和自定义的图标BitmapDescriptor对象
  */
 public interface ClusterItem {
 
-    /**
-     * The position of this marker. This must always return the same value.
-     */
     LatLng getPosition();
 
     BitmapDescriptor getBitmapDescriptor();

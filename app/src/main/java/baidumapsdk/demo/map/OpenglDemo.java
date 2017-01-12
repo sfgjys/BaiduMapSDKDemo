@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
+
 import baidumapsdk.demo.R;
 
 /**
@@ -34,7 +35,7 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
 
     // 地图相关
     MapView mMapView;
-    BaiduMap mBaiduMap;
+    BaiduMap mMapControl;
     Bitmap bitmap;
     private LatLng latlng1 = new LatLng(39.97923, 116.357428);
     LatLng latlng2 = new LatLng(39.94923, 116.397428);
@@ -57,10 +58,10 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
         setContentView(R.layout.activity_opengl);
         // 初始化地图
         mMapView = (MapView) findViewById(R.id.bmapView);
-        mBaiduMap = mMapView.getMap();
-        mBaiduMap.setOnMapDrawFrameCallback(this);
-        bitmap = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.ground_overlay);
+        mMapControl = mMapView.getMap();
+        mMapControl.setOnMapDrawFrameCallback(this);// 设置百度地图在每一帧绘制时的回调接口，该接口在绘制线程中调用
+        // 将资源中图片转换为Bitmap对象
+        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ground_overlay);
     }
 
     @Override
@@ -83,11 +84,12 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
         super.onDestroy();
     }
 
+    // 地图每一帧绘制结束后回调接口，在此你可以绘制自己的内容
+    // 参数一:地图 opengl引用,参数二:地图当前正在绘制时的地图状态
     public void onMapDrawFrame(GL10 gl, MapStatus drawingMapStatus) {
-        if (mBaiduMap.getProjection() != null) {
+        if (mMapControl.getProjection() != null) {
             calPolylinePoint(drawingMapStatus);
-            drawPolyline(gl, Color.argb(255, 255, 0, 0), vertexBuffer, 10, 3,
-                    drawingMapStatus);
+            drawPolyline(gl, Color.argb(255, 255, 0, 0), vertexBuffer, 10, 3, drawingMapStatus);
             drawTexture(gl, bitmap, drawingMapStatus);
         }
     }
@@ -97,7 +99,7 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
         vertexs = new float[3 * latLngPolygon.size()];
         int i = 0;
         for (LatLng xy : latLngPolygon) {
-            polyPoints[i] = mBaiduMap.getProjection().toOpenGLLocation(xy,
+            polyPoints[i] = mMapControl.getProjection().toOpenGLLocation(xy,
                     mspStatus);
             vertexs[i * 3] = polyPoints[i].x;
             vertexs[i * 3 + 1] = polyPoints[i].y;
@@ -119,8 +121,9 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
         return fb;
     }
 
+
     private void drawPolyline(GL10 gl, int color, FloatBuffer lineVertexBuffer,
-            float lineWidth, int pointSize, MapStatus drawingMapStatus) {
+                              float lineWidth, int pointSize, MapStatus drawingMapStatus) {
         gl.glEnable(GL10.GL_BLEND);
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
@@ -141,34 +144,31 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
     }
 
     int textureId = -1;
-    
+
+
     /**
      * 使用opengl坐标绘制
-     * 
-     * @param gl
-     * @param bitmap
-     * @param drawingMapStatus
      */
     public void drawTexture(GL10 gl, Bitmap bitmap, MapStatus drawingMapStatus) {
-        PointF p1 = mBaiduMap.getProjection().toOpenGLLocation(latlng2,
+        PointF p1 = mMapControl.getProjection().toOpenGLLocation(latlng2,
                 drawingMapStatus);
-        PointF p2 = mBaiduMap.getProjection().toOpenGLLocation(latlng3,
+        PointF p2 = mMapControl.getProjection().toOpenGLLocation(latlng3,
                 drawingMapStatus);
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 3 * 4);
         byteBuffer.order(ByteOrder.nativeOrder());
         FloatBuffer vertices = byteBuffer.asFloatBuffer();
-        vertices.put(new float[] { p1.x, p1.y, 0.0f, p2.x, p1.y, 0.0f, p1.x,
-                p2.y, 0.0f, p2.x, p2.y, 0.0f });
+        vertices.put(new float[]{p1.x, p1.y, 0.0f, p2.x, p1.y, 0.0f, p1.x,
+                p2.y, 0.0f, p2.x, p2.y, 0.0f});
 
         ByteBuffer indicesBuffer = ByteBuffer.allocateDirect(6 * 2);
         indicesBuffer.order(ByteOrder.nativeOrder());
         ShortBuffer indices = indicesBuffer.asShortBuffer();
-        indices.put(new short[] { 0, 1, 2, 1, 2, 3 });
+        indices.put(new short[]{0, 1, 2, 1, 2, 3});
 
         ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * 2 * 4);
         textureBuffer.order(ByteOrder.nativeOrder());
         FloatBuffer texture = textureBuffer.asFloatBuffer();
-        texture.put(new float[] { 0, 1f, 1f, 1f, 0f, 0f, 1f, 0f });
+        texture.put(new float[]{0, 1f, 1f, 1f, 0f, 0f, 1f, 0f});
 
         indices.position(0);
         vertices.position(0);
@@ -188,7 +188,7 @@ public class OpenglDemo extends Activity implements OnMapDrawFrameCallback {
                     GL10.GL_NEAREST);
             gl.glBindTexture(GL10.GL_TEXTURE_2D, 0);
         }
-    
+
         gl.glEnable(GL10.GL_TEXTURE_2D);
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);

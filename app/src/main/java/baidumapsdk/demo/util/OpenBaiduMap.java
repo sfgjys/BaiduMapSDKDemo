@@ -57,7 +57,6 @@ public class OpenBaiduMap extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
                 switch (position) {
                     case 0:
                         startNavi();
@@ -119,6 +118,58 @@ public class OpenBaiduMap extends Activity {
         return data;
     }
 
+    private class OpenBaiduMapListAdapter extends BaseAdapter {
+        List<String> list;
+
+        public OpenBaiduMapListAdapter(List<String> list) {
+            super();
+            this.list = list;
+        }
+
+        @Override
+        public View getView(int index, View convertView, ViewGroup parent) {
+            convertView = View.inflate(OpenBaiduMap.this, R.layout.item_function_intro, null);
+            TextView title = (TextView) convertView.findViewById(R.id.function_name);
+            TextView desc = (TextView) convertView.findViewById(R.id.function_describe);
+            desc.setVisibility(View.INVISIBLE);
+            title.setText(list.get(index));
+
+            return convertView;
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int index) {
+            return list.get(index);
+        }
+
+        @Override
+        public long getItemId(int id) {
+            return id;
+        }
+    }
+
+    // ************************************************以上都是展示各种调用方法的按键的UI**************************************************************
+
+
+    /*
+    * 启动百度地图导航:BaiduMapNavigation(核心类):
+    *   调起百度地图导航页面,可以调起百度地图骑行导航页面,调起百度地图步行导航页面三种导航功能(具体方法查api),三个方法都需要NaviParaOption导航配置对象
+    * 启动百度地图路线规划:BaiduMapRoutePlan(核心类):
+    *   调起百度地图驾车路线检索页面,调起百度地图公交路线检索页面,调起百度地图步行路线检索页面(具体方法查api),三个方法都需要RouteParaOption路线规划配置对象
+    * 启动百度地图POI点相关搜索:BaiduMapPoiSearch(核心类):
+    *   调起百度地图poi全景展示页面,调起百度地图poi详情页面,调起百度地图poi周边检索页面(具体方法查api),三个方法都需要RouteParaOptionPOI检索配置对象
+    * 注意以上三个核心类在默认情况下使用各种方法都是首先调用地图app的,如果没有app则会调用浏览器进行web显示:
+    *   该功能是通过setSupportWebNavi(boolean),setSupportWebPoi(boolean),setSupportWebRoute(boolean)来设置的,如果设置了false则不会调用浏览器,而是抛出异常走catch里面的内容
+    * OpenClientUtil.getLatestBaiduMapApp(Context);一个工具类方法,打开最新版本百度地图下载页面
+    * 最后BaiduMapNavigation,BaiduMapRoutePlan,BaiduMapPoiSearch三个核心类不用时记得调用finish()方法释放资源
+    * */
+
+
     /**
      * 启动百度地图导航(Native)
      */
@@ -127,9 +178,7 @@ public class OpenBaiduMap extends Activity {
         LatLng pt2 = new LatLng(mLat2, mLon2);
 
         // 构建 导航参数
-        NaviParaOption para = new NaviParaOption()
-                .startPoint(pt1).endPoint(pt2)
-                .startName("天安门").endName("百度大厦");
+        NaviParaOption para = new NaviParaOption().startPoint(pt1).endPoint(pt2).startName("天安门").endName("百度大厦");
 
         try {
             BaiduMapNavigation.openBaiduMapNavi(para, this);
@@ -147,15 +196,13 @@ public class OpenBaiduMap extends Activity {
         LatLng pt1 = new LatLng(mLat1, mLon1);
         LatLng pt2 = new LatLng(mLat2, mLon2);
         // 构建 导航参数
-        NaviParaOption para = new NaviParaOption()
-                .startPoint(pt1).endPoint(pt2);
+        NaviParaOption para = new NaviParaOption().startPoint(pt1).endPoint(pt2);
 
         BaiduMapNavigation.openWebBaiduMapNavi(para, this);
     }
 
     /**
      * 启动百度地图步行导航(Native)
-     *
      */
     public void startWalkingNavi() {
         LatLng pt1 = new LatLng(mLat1, mLon1);
@@ -177,7 +224,6 @@ public class OpenBaiduMap extends Activity {
 
     /**
      * 启动百度地图骑行导航(Native)
-     *
      */
     public void startBikingNavi() {
         LatLng pt1 = new LatLng(mLat1, mLon1);
@@ -196,6 +242,7 @@ public class OpenBaiduMap extends Activity {
         }
 
     }
+
     /**
      * 启动百度地图Poi周边检索
      */
@@ -229,6 +276,7 @@ public class OpenBaiduMap extends Activity {
         }
 
     }
+
     /**
      * 启动百度地图POI全景页面
      */
@@ -312,10 +360,10 @@ public class OpenBaiduMap extends Activity {
         // 构建 route搜索参数
         RouteParaOption para = new RouteParaOption()
 //            .startPoint(pt_start)
-                    .startName("天安门")
-                        .endPoint(ptStart)
+                .startName("天安门")
+                .endPoint(ptStart)
 //            .endName("百度大厦")
-                            .busStrategyType(EBusStrategyType.bus_recommend_way);
+                .busStrategyType(EBusStrategyType.bus_recommend_way);
 
 //        RouteParaOption para = new RouteParaOption()
 //                .startName("天安门").endName("百度大厦").busStrategyType(EBusStrategyType.bus_recommend_way);
@@ -330,14 +378,6 @@ public class OpenBaiduMap extends Activity {
             showDialog();
         }
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        BaiduMapNavigation.finish(this);
-        BaiduMapRoutePlan.finish(this);
-        BaiduMapPoiSearch.finish(this);
     }
 
     /**
@@ -366,40 +406,12 @@ public class OpenBaiduMap extends Activity {
 
     }
 
-
-    private class OpenBaiduMapListAdapter extends BaseAdapter {
-        List<String> list;
-
-        public OpenBaiduMapListAdapter(List<String> list) {
-            super();
-            this.list = list;
-        }
-
-        @Override
-        public View getView(int index, View convertView, ViewGroup parent) {
-            convertView = View.inflate(OpenBaiduMap.this,
-                    R.layout.item_function_intro, null);
-            TextView title = (TextView) convertView.findViewById(R.id.function_name);
-            TextView desc = (TextView) convertView.findViewById(R.id.function_describe);
-            desc.setVisibility(View.INVISIBLE);
-            title.setText(list.get(index));
-
-            return convertView;
-        }
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int index) {
-            return list.get(index);
-        }
-
-        @Override
-        public long getItemId(int id) {
-            return id;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaiduMapNavigation.finish(this);
+        BaiduMapRoutePlan.finish(this);
+        BaiduMapPoiSearch.finish(this);
     }
+
 }

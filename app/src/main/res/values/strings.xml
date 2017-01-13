@@ -3,6 +3,7 @@
 
     <string name="app_name">百度地图SDK DEMO</string>
 
+
     <string name="name_tuceng_show_map">对图层显示进行设置</string>
     <string name="name_multi_map">多地图展示—MultiMapViewDemo</string>
     <string name="name_gexing_map">个性地图的使用</string>
@@ -26,9 +27,14 @@
     <string name="name_texturemapview_map">地图渲染</string>
     <string name="name_track_show_map">小车轨迹平滑移动</string>
 
-    <string name="describe_track_show_map">
-        该功能的实质是画了一条路线覆盖物,在画一个移动Marker覆盖物,然后计算Marker移动的方向和移动距离,其核心就是计算移动方向和距离的算法。
-    </string>
+    <string name="name_route_plan_map">路径规划功能—RoutePlanDemo</string>
+    <string name="name_lbs_search_map">LBS.云检索功能—CloudSearchDemo</string>
+    <string name="name_marker_cluster_map">点聚合功能—MarkerClusterDemo</string>
+    <string name="name_radar_map">周边雷达功能—RadarDemo</string>
+    <string name="name_in_door_map">室内图—IndoorMapDemo</string>
+    <string name="name_in_door_search_map">室内图检索—IndoorSearchDemo</string>
+
+    <string name="describe_track_show_map">该功能的实质是画了一条路线覆盖物,在画一个移动Marker覆盖物,然后计算Marker移动的方向和移动距离,其核心就是计算移动方向和距离的算法。</string>
     <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
     <string name="describe_multi_map">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
     <string name="describe_tuceng_show_map">设置地图显示卫星图;普通图;空白图三选一 设置显示热力图,路线实况图 核心是调用BaiduMap(地图控制器)的方法进行设置 该对象则是通过地图控件(MapView)获取</string>
@@ -232,49 +238,52 @@
                        getTile方法需要返回Tile对象,创建Tile对象需要Bitmap对象(由瓦片图转换来的)的宽,高以及Bitmap对象转为byt[]的值
                            Bitmap对象转为byt[]的方法看本类中有</string>
 
-    <string name="demo_name_ui">UI控制功能</string>
-    <string name="demo_name_location">定位图层展示</string>
-    <string name="demo_name_geometry">自定义绘制功能，折线可点击</string>
-    <string name="demo_name_favorite">点收藏功能</string>
-    <string name="demo_name_radar">周边雷达功能</string>
-    <string name="demo_name_overlay">覆盖物功能</string>
-    <string name="demo_name_poi">POI搜索功能</string>
-    <string name="demo_name_basemap">基本地图功能</string>
-    <string name="demo_name_map_fragment">基于MapFragment的基本地图</string>
-    <string name="demo_name_multimap">多地图展示</string>
-    <string name="demo_name_layers">图层展示</string>
-    <string name="demo_name_control">地图操作功能</string>
-    <string name="demo_name_route">路径规划功能</string>
-    <string name="demo_name_geocode">地理编码功能</string>
-    <string name="demo_name_bus">公交线路查询功能</string>
-    <string name="demo_name_offline">离线地图功能</string>
-    <string name="demo_name_districsearch">行政区域检索</string>
-    <string name="demo_name_indoor">室内图功能</string>
-    <string name="demo_name_indoorsearch">室内图检索功能</string>
-    <string name="demo_name_share">短串分享</string>
-    <string name="demo_name_tileoverlay">瓦片图功能</string>
-    <string name="demo_name_heatmap">热力图功能</string>
-    <string name="demo_name_cloud">LBS.云检索功能</string>
-    <string name="demo_name_open_baidumap">调启百度地图</string>
-    <string name="demo_name_opengl">OpenGL绘制功能</string>
-    <string name="demo_title_cloud">LBS.云检索功能—CloudSearchDemo</string>
-    <string name="demo_desc_cloud">介绍如何使用LBS.云检索用户自有数据</string>
-    <string name="demo_title_cluster">点聚合功能—MarkerClusterDemo</string>
-    <string name="demo_desc_cluster">介绍如何实现多个Marker点的点聚合功能</string>
+    <string name="describe_radar_map">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
+    <string name="describe_lbs_search_map">介绍如何使用LBS.云检索用户自有数据</string>
+    <string name="describe_marker_cluster_map">介绍如何实现多个Marker点的点聚合功能</string>
+    <string name="describe_route_plan_map">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
+    <string name="describe_in_door_map">介绍室内图功能，显示室内图及室内路线规划</string>
+    <string name="describe_in_door_search_map">介绍在室内图中进行室内POI检索</string>
+
+
+    <string name="label_track_show_map">小车移动轨道</string>
+    <string name="label_texturemapview_map">渲染效果</string>
+    <string name="label_name_ui">UI控制功能</string>
+    <string name="label_name_location">定位图层展示</string>
+    <string name="label_name_geometry">自定义绘制功能，折线可点击</string>
+    <string name="label_name_favorite">点收藏功能</string>
+    <string name="label_name_radar">周边雷达功能</string>
+    <string name="label_name_overlay">覆盖物功能</string>
+    <string name="label_name_poi_map">POI搜索功能</string>
+    <string name="label_name_basemap">基本地图功能</string>
+    <string name="label_name_map_fragment">基于MapFragment的基本地图</string>
+    <string name="label_name_multimap">多地图展示</string>
+    <string name="label_name_layers">图层展示</string>
+    <string name="label_name_control">地图操作功能</string>
+    <string name="label_name_route">路径规划功能</string>
+    <string name="label_name_geocode">地理编码功能</string>
+    <string name="label_name_bus">公交线路查询功能</string>
+    <string name="label_name_offline">离线地图功能</string>
+    <string name="label_name_districsearch">行政区域检索</string>
+    <string name="label_name_indoor">室内图功能</string>
+    <string name="label_name_indoorsearch">室内图检索功能</string>
+    <string name="label_name_share">短串分享</string>
+    <string name="label_name_tileoverlay">瓦片图功能</string>
+    <string name="label_name_heatmap">热力图功能</string>
+    <string name="label_name_cloud">LBS.云检索功能</string>
+    <string name="label_name_open_baidumap">调启百度地图</string>
+    <string name="label_name_opengl">OpenGL绘制功能</string>
+    <string name="label_title_activity_cloud_search">云检索使用介绍</string>
+    <string name="label_activity_marker_cluster">点聚合功能</string>
+
+
     <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
-    <string name="demo_title_radar">周边雷达功能—RadarDemo</string>
-    <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
-    <string name="demo_title_route">路径规划功能—RoutePlanDemo</string>
     <string name="demo_title_poinearby">POI附近搜索功能</string>
-    <string name="demo_desc_route">介绍跨城交通、公交、驾车、步行、骑行五种线路规划方法及自定义图标方法</string>
-    <string name="demo_title_indoor">室内图—IndoorMapDemo</string>
-    <string name="demo_desc_indoor">介绍室内图功能，显示室内图及室内路线规划</string>
-    <string name="demo_title_indoorsearch">室内图检索—IndoorSearchDemo</string>
-    <string name="demo_desc_indoorsearch">介绍在室内图中进行室内POI检索</string>
+
 
     <string name="key_error">"请在  DemoApplication.java文件输入正确的授权Key！\r\n申请地址：http://dev.baidu.com/wiki/static/imap/key/"</string>
     <string name="navi_tip">百度地图SDK支持通过相关的接口，调启百度地图客户端（v5.0以上）导航和Web端百度地图导航。</string>
-    <string name="title_activity_cloud_search_demo">云检索使用介绍</string>
+
     <string name="cloud_search_tips"> \t\tLBS.云是百度地图针对LBS开发者推出的平台级服务。结合已有的地图API和SDK服务。通过开放服务端存储和计算能力,提供海量位置数据存储、检索、展示一体化解决方案。\n\n
           \t\t该服务对开发者免费开放。测试demo里写入了测试的ak。开发者可以使用测试ak查看 LBS.云检索的效果。如果开发者要使用自己的数据，请在申请ak后替换demo中的ak。\n\n
           \t\t如有任何关于LBS.云服务的问题,诸如如何申请ak、如何存储和检索数据等，请访问百度地图官方“LBS开放平台”。地址：http://lbsyun.baidu.com/  \n
@@ -304,7 +313,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_marker_cluster_demo">点聚合功能</string>
+
     <string name="title_markercluster_desc">\t\t缩小地图，以显示标注物的聚合点 \n
     \t\t放大地图，显示Marker点 \n</string>
     <string name="title_activity_texture_map_view_demo">TextureMapViewDemo</string>

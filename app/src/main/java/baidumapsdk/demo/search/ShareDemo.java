@@ -1,10 +1,18 @@
 package baidumapsdk.demo.search;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import baidumapsdk.demo.R;
 
@@ -97,24 +105,21 @@ public class ShareDemo extends Activity {
     }
 
     public void startShareDemo(View view) {
-        Intent intent = new Intent();
-        intent.setClass(this, ShareDemoActivity.class);
-        startActivity(intent);
-        /*String s = editText.getText().toString().trim();
+//        Intent intent = new Intent();
+//        intent.setClass(this, ShareDemoActivity.class);
+//        startActivity(intent);
+        String s = editText.getText().toString().trim();
         if (isEmpty(s)) {
             return;
         }
 
         int page1 = Integer.parseInt(s);
-
-        int[] intEachValue = getIntEachValue(page1);
-        getChineseInt(intEachValue);
+        final int[] intEachValue1 = getIntEachValue(page1);
 
         int page2 = page1 + 1;
+        final int[] intEachValue2 = getIntEachValue(page2);
 
-        int[] intEachValue1 = getIntEachValue(page2);*/
-
-        /*new Thread() {
+        new Thread() {
             @Override
             public void run() {
                 super.run();
@@ -130,9 +135,9 @@ public class ShareDemo extends Activity {
                     bufferedWriter = new BufferedWriter(new FileWriter(file));
                     String readLine;
                     while ((readLine = bufferedReader.readLine()) != null) {
-                        if (readLine.contains(getPage(bai1, shi1, ge1))) {// getPage(bai1, shi1, ge1)
+                        if (readLine.contains("第" + getChineseInt(intEachValue1) + "章")) {// getPage(bai1, shi1, ge1)
                             isReadWriter = true;
-                        } else if (readLine.contains(getPage(bai2, shi2, ge2))) {// getPage(bai2, shi2, ge2)
+                        } else if (readLine.contains("第" + getChineseInt(intEachValue2) + "章")) {// getPage(bai2, shi2, ge2)
                             isReadWriter = false;
                         }
                         if (isReadWriter) {
@@ -154,7 +159,7 @@ public class ShareDemo extends Activity {
                     }
                 }
             }
-        }.start();*/
+        }.start();
 
 
     }

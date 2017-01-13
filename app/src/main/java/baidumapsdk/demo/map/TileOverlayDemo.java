@@ -179,7 +179,7 @@ public class TileOverlayDemo extends Activity {
                 .setPositionFromBounds(new LatLngBounds.Builder().include(northeast).include(southwest).build()));
         if (mapLoaded) {
             mMapControl.setMaxAndMinZoomLevel(21.0f, 3.0f);// 根据瓦图存在的最大与最小级别限制地图缩放级别
-            mMapControl.setMapStatusLimits(new LatLngBounds.Builder().include(northeast).include(southwest).build());// 设置地图的可移动区域，只有在 OnMapLoadedCallback.onMapLoaded() 之后设置才生效
+            mMapControl.setMapStatusLimits(new LatLngBounds.Builder().include(northeast).include(southwest).build());// 设置针对需要展示部分固定范围的地图，只有在 OnMapLoadedCallback.onMapLoaded() 之后设置才生效
             mMapControl.setMapStatus(mMapStatusUpdate);
         }
     }

@@ -10,6 +10,7 @@ import android.widget.TabHost;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.TextureMapView;
+
 import baidumapsdk.demo.R;
 
 /**
@@ -35,15 +36,11 @@ public class TextureMapViewDemo extends Activity {
         TabHost tabHost = (TabHost) findViewById(R.id.tabhost);
         // 如果没有继承TabActivity时，通过该种方法加载启动tabHost
         tabHost.setup();
-        tabHost.addTab(tabHost.newTabSpec("texturehint").setIndicator("功能说明",
-                null).setContent(
-                R.id.texturehint));
+        tabHost.addTab(tabHost.newTabSpec("texturehint").setIndicator("功能说明", null).setContent(R.id.texturehint));
 
-        tabHost.addTab(tabHost.newTabSpec("mTexturemap").setIndicator("地图")
-                .setContent(R.id.mTexturemap));
+        tabHost.addTab(tabHost.newTabSpec("mTexturemap").setIndicator("地图").setContent(R.id.mTexturemap));
 
-        tabHost.addTab(tabHost.newTabSpec("textdesc").setIndicator("Scrollview页")
-                .setContent(R.id.textdesc));
+        tabHost.addTab(tabHost.newTabSpec("textdesc").setIndicator("Scrollview页").setContent(R.id.textdesc));
     }
 
     @Override

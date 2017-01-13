@@ -185,7 +185,7 @@
         <activity
             android:name=".map.TextureMapViewDemo"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/demo_desc_texturemapview"
+            android:label="@string/describe_texturemapview_map"
             android:screenOrientation="portrait" />
         <activity
             android:name=".map.TileOverlayDemo"

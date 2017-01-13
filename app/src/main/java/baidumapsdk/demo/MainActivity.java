@@ -90,19 +90,19 @@ public class MainActivity extends Activity {
             new SingleFunctionBean(R.string.name_heat_map, R.string.describe_heat_map, HeatMapDemo.class),
             new SingleFunctionBean(R.string.name_search_address_zuobiao_map, R.string.describe_search_address_zuobiao_map, GeoCoderDemo.class),
             new SingleFunctionBean(R.string.name_search_poi_suggestion_search_map, R.string.describe_search_poi_suggestion_search_map, PoiSearchDemo.class),
-            new SingleFunctionBean(R.string.demo_title_route, R.string.demo_desc_route, RoutePlanDemo.class),// 未完成
+            new SingleFunctionBean(R.string.demo_title_route, R.string.demo_desc_route, RoutePlanDemo.class),// 路线规划未完成
             new SingleFunctionBean(R.string.name_districsearch_map, R.string.describe_districsearch_map, DistrictSearchDemo.class),
             new SingleFunctionBean(R.string.name_search_bus_line_map, R.string.describe_search_bus_line_map, BusLineSearchDemo.class),
             new SingleFunctionBean(R.string.name_search_share_url_map, R.string.describe_search_share_url_map, ShareDemo.class),
             new SingleFunctionBean(R.string.name_offline_download_map, R.string.describe_offline_download_map, OfflineDemo.class),
-            new SingleFunctionBean(R.string.demo_title_radar, R.string.demo_desc_radar, RadarDemo.class),
+            new SingleFunctionBean(R.string.demo_title_radar, R.string.demo_desc_radar, RadarDemo.class),// 周边雷达未完成
             new SingleFunctionBean(R.string.name_open_app_or_web_map, R.string.describe_open_app_or_web_map, OpenBaiduMap.class),
             new SingleFunctionBean(R.string.name_collect_custom_poi_map, R.string.describe_collect_custom_poi_map, FavoriteDemo.class),
-            new SingleFunctionBean(R.string.demo_title_cloud, R.string.demo_desc_cloud, CloudSearchDemo.class),
+            new SingleFunctionBean(R.string.demo_title_cloud, R.string.demo_desc_cloud, CloudSearchDemo.class),// LBS云检索未完成
             new SingleFunctionBean(R.string.name_open_gl_map, R.string.describe_open_gl_map, OpenglDemo.class),
-            new SingleFunctionBean(R.string.demo_title_cluster, R.string.demo_desc_cluster, MarkerClusterDemo.class),
-            new SingleFunctionBean(R.string.demo_title_tileoverlay, R.string.demo_desc_tileoverlay, TileOverlayDemo.class),
-            new SingleFunctionBean(R.string.demo_title_texturemapview, R.string.demo_desc_texturemapview, TextureMapViewDemo.class),
+            new SingleFunctionBean(R.string.demo_title_cluster, R.string.demo_desc_cluster, MarkerClusterDemo.class),// 点聚合未完成
+            new SingleFunctionBean(R.string.name_tileoverlay_map, R.string.describe_tileoverlay_map, TileOverlayDemo.class),
+            new SingleFunctionBean(R.string.name_texturemapview_map, R.string.describe_texturemapview_map, TextureMapViewDemo.class),
             new SingleFunctionBean(R.string.demo_title_indoor, R.string.demo_desc_indoor, IndoorMapDemo.class),
             new SingleFunctionBean(R.string.demo_title_indoorsearch, R.string.demo_desc_indoorsearch, IndoorSearchDemo.class),
             new SingleFunctionBean(R.string.demo_title_track_show, R.string.demo_desc_track_show, TrackShowDemo.class)

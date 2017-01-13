@@ -22,6 +22,8 @@
     <string name="name_open_app_or_web_map">调启百度地图—OpenBaiduMap</string>
     <string name="name_collect_custom_poi_map">点收藏功能—FavoriteDemo</string>
     <string name="name_open_gl_map">OpenGL绘制功能—OpenGLDemo</string>
+    <string name="name_tileoverlay_map">瓦片图功能—TileOverlayDemo</string>
+    <string name="name_texturemapview_map">地图渲染</string>
 
     <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
     <string name="describe_multi_map">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
@@ -207,8 +209,24 @@
                根据指定的id可将重新设置的FavoritePoiInfo替换圆FavoritePoiInfo:updateFavPoi(java.lang.String id, FavoritePoiInfo info)
            最后不用FavoriteManager是记得调用destroy()</string>
     <string name="describe_open_gl_map">核心方法是:使用OpenGL库进行2D绘制或者3D渲染,待学习。。。。。。</string>
-
-
+    <string name="describe_texturemapview_map">地图渲染就是使用TextureMapView替代MapView,使用方法类似(使用前提:Android 4.0以上系统,并开启强制GPU渲染),解决原MapView基于系统GLSurfaceView导致在TabHost和scrollView中等闪黑屏、白边、压盖等问题。</string>
+    <string name="describe_tileoverlay_map">
+         使用瓦图替换底图显示:
+           设置mMapControl.setMapType(BaiduMap.MAP_TYPE_NONE)使得地图为空白模式;(视情况需要,来确定要不要设定)
+           然后判断下TileOverlay对象是否为空,TileOverlay是地图控制器添加TileOverlayOptions瓦图配置对象的返回值,如果TileOverlay对象不为空,那么为了添加另一种瓦图,需要调用removeTileOverlay()方法,去除正在显示的瓦图
+           此处出现分叉:
+               在线瓦图:
+                   创建瓦图图片提供UrlTileProvider抽象对象,实现三个抽象方法,分别是设置瓦图最大显示(就是缩放)级别,瓦图最小显示(就是缩放)级别以及在线瓦图的url
+                       url例如:http://api0.map.bdimg.com/customimage/tile?x={x}&amp;y={y}&amp;z={z}&amp;udt=20150601&amp;customid=light
+                   接着创建瓦图配置对象TileOverlayOptions,使用对象调用tileProvider方法设置瓦图图片提供对象,调用setMaxTileTmp方法设置在线瓦片图的内存缓存大小,默认值为20MB,
+                       调用setPositionFromBounds方法设置瓦图的显示区域,瓦片图会以多个瓦片图连接并覆盖该区域,默认值为世界范围显示瓦片图(这个方法暂时找不到用途)
+                   最后使用地图控制器调用addTileLayer方法添加瓦图配置对象TileOverlayOptions,返回TileOverlay对象
+                   注意:根据瓦图存在的最大与最小级别限制地图缩放级别
+               离线瓦图:
+                   与在线瓦图的主要区别在于瓦图图片提供对象,离线的提供对象是FileTileProvider对象,两者都是TileProvider的子类
+                       设置最大最小显示没变,但是设置在线瓦图的url的getTileUrl()方法变为getTile(int x, int y, int z)方法
+                       getTile方法需要返回Tile对象,创建Tile对象需要Bitmap对象(由瓦片图转换来的)的宽,高以及Bitmap对象转为byt[]的值
+                           Bitmap对象转为byt[]的方法看本类中有</string>
 
     <string name="demo_name_ui">UI控制功能</string>
     <string name="demo_name_location">定位图层展示</string>
@@ -237,13 +255,9 @@
     <string name="demo_name_opengl">OpenGL绘制功能</string>
     <string name="demo_title_cloud">LBS.云检索功能—CloudSearchDemo</string>
     <string name="demo_desc_cloud">介绍如何使用LBS.云检索用户自有数据</string>
-
     <string name="demo_title_cluster">点聚合功能—MarkerClusterDemo</string>
     <string name="demo_desc_cluster">介绍如何实现多个Marker点的点聚合功能</string>
-    <string name="demo_title_tileoverlay">瓦片图功能—TileOverlayDemo</string>
-    <string name="demo_desc_tileoverlay">介绍如何在地图上添加自定义的瓦片图</string>
     <string name="demo_desc_poinearbysearch">POI附近检索功能</string>
-    <string name="demo_desc_texturemapview">地图由TextureView渲染</string>
     <string name="demo_title_radar">周边雷达功能—RadarDemo</string>
     <string name="demo_desc_radar">介绍如何使用周边雷达功能上传位置、检索周边的人</string>
     <string name="demo_title_route">路径规划功能—RoutePlanDemo</string>
@@ -255,7 +269,6 @@
     <string name="demo_desc_indoorsearch">介绍在室内图中进行室内POI检索</string>
     <string name="demo_title_track_show">小车轨迹平滑移动</string>
     <string name="demo_desc_track_show">介绍小车轨迹平滑移动的实现</string>
-
 
     <string name="key_error">"请在  DemoApplication.java文件输入正确的授权Key！\r\n申请地址：http://dev.baidu.com/wiki/static/imap/key/"</string>
     <string name="navi_tip">百度地图SDK支持通过相关的接口，调启百度地图客户端（v5.0以上）导航和Web端百度地图导航。</string>
@@ -295,7 +308,6 @@
     <string name="title_activity_texture_map_view_demo">TextureMapViewDemo</string>
     <string name="title_activity_poi_near_by_search_demo">PoiNearBySearchDemo</string>
     <string name="instruction">当设计的UI与地图部分重叠时，设置地图的padding值,以防止UI遮挡</string>
-    <string name="demo_title_texturemapview">地图渲染</string>
 
 
 </resources>

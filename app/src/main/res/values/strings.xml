@@ -24,7 +24,11 @@
     <string name="name_open_gl_map">OpenGL绘制功能—OpenGLDemo</string>
     <string name="name_tileoverlay_map">瓦片图功能—TileOverlayDemo</string>
     <string name="name_texturemapview_map">地图渲染</string>
+    <string name="name_track_show_map">小车轨迹平滑移动</string>
 
+    <string name="describe_track_show_map">
+        该功能的实质是画了一条路线覆盖物,在画一个移动Marker覆盖物,然后计算Marker移动的方向和移动距离,其核心就是计算移动方向和距离的算法。
+    </string>
     <string name="describe_fragment_map">具体到MapStatus.Builder地图状态建造者;以地图状态建造者为参数创建BaiduMapOptions对象;以BaiduMapOptions里的所有配置为核心创建一个基于Fragment的Map</string>
     <string name="describe_multi_map">多地图展示:通过Fragment实现; 其他代码说了在地图已经展示的情况下需要更新地图状态:MapStatusUpdate类的设置与使用</string>
     <string name="describe_tuceng_show_map">设置地图显示卫星图;普通图;空白图三选一 设置显示热力图,路线实况图 核心是调用BaiduMap(地图控制器)的方法进行设置 该对象则是通过地图控件(MapView)获取</string>
@@ -267,8 +271,6 @@
     <string name="demo_desc_indoor">介绍室内图功能，显示室内图及室内路线规划</string>
     <string name="demo_title_indoorsearch">室内图检索—IndoorSearchDemo</string>
     <string name="demo_desc_indoorsearch">介绍在室内图中进行室内POI检索</string>
-    <string name="demo_title_track_show">小车轨迹平滑移动</string>
-    <string name="demo_desc_track_show">介绍小车轨迹平滑移动的实现</string>
 
     <string name="key_error">"请在  DemoApplication.java文件输入正确的授权Key！\r\n申请地址：http://dev.baidu.com/wiki/static/imap/key/"</string>
     <string name="navi_tip">百度地图SDK支持通过相关的接口，调启百度地图客户端（v5.0以上）导航和Web端百度地图导航。</string>

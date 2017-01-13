@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
             new SingleFunctionBean(R.string.name_texturemapview_map, R.string.describe_texturemapview_map, TextureMapViewDemo.class),
             new SingleFunctionBean(R.string.demo_title_indoor, R.string.demo_desc_indoor, IndoorMapDemo.class),
             new SingleFunctionBean(R.string.demo_title_indoorsearch, R.string.demo_desc_indoorsearch, IndoorSearchDemo.class),
-            new SingleFunctionBean(R.string.demo_title_track_show, R.string.demo_desc_track_show, TrackShowDemo.class)
+            new SingleFunctionBean(R.string.name_track_show_map, R.string.describe_track_show_map, TrackShowDemo.class)
     };
     private SDKInitResultReceiver mSDKInitResult;
 
